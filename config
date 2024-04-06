@@ -191,7 +191,4 @@ bar {
         tray_output none
 }
 
-# exec_always "setxkbmap -model pc104 -layout us,br -variant ,, -option grp:win_space_toggle"
-
-exec "setxkbmap -layout us,br"
-exec "setxkbmap -option 'grp:win_space_toggle'"
+exec_always "setxkbmap -model pc104 -layout us,br -variant ,, -option grp:win_space_toggle"
