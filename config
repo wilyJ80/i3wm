@@ -188,6 +188,10 @@ bindsym $mod+r mode "resize"
 bar {
         position top
         status_command $HOME/.config/i3/status.sh
+        tray_output none
 }
 
-exec_always "setxkbmap -model pc104 -layout us,br -variant ,, -option grp:win_space_toggle"
+# exec_always "setxkbmap -model pc104 -layout us,br -variant ,, -option grp:win_space_toggle"
+
+exec "setxkbmap -layout us,br"
+exec "setxkbmap -option 'grp:win_space_toggle'"

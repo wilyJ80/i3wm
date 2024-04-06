@@ -9,6 +9,7 @@ while true; do
     ram_used=$(free -kh | grep Mem | awk '{print $3}')
     ram_full=$(free -kh | grep Mem | awk '{print $2}')
     power_used=$(upower -d | grep energy-rate | awk '{print $2}' | head -n1)
+    keyboard_led=$(xset -q | grep -A 0 'LED' | cut -c59-67)
     
     # Emoji representations for status indicators
     if [ $battery -gt 20 ]; then
@@ -35,7 +36,21 @@ while true; do
 
     power_emoji="⚡"
 
-    echo "📶 SSID: $wifi | $volume_emoji VOL: $volume% | $brightness_emoji BR: $brightness/255 | RAM: $ram_used / $ram_full | $power_emoji $power_used W | $battery_emoji BAT: $battery% | $date"
+    case $keyboard_led in
+        *******1)
+            keyboard_status="CAPS"
+            ;;
+        0000000*)
+            keyboard_status="US";
+            ;;
+        0000100*)
+            keyboard_status="PT"
+            ;;
+        *)
+            ;;
+    esac
 
-    sleep 0.2
+    echo "$keyboard_status | 📶 SSID: $wifi | $volume_emoji VOL: $volume% | $brightness_emoji BR: $brightness/255 | RAM: $ram_used / $ram_full | $power_emoji $power_used W | $battery_emoji BAT: $battery% | $date"
+
+    sleep 0.1
 done
